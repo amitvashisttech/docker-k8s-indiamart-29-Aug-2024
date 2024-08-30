@@ -1,0 +1,29 @@
+    1. ClusterIP 
+    POD -> ClusterIP:ClusterPort -> [ PODIP_1:PodPort,PODIP_2:PodPort,PODIP_3:PodPort]
+    
+    
+    2. NodePort 
+    Chrome -> 172.31.0.101:31001 ->  worker101 -> KubeProxy -> Routing Rules -> ClusterIP:ClusterPort -> [ PODIP_1:PodPort,PODIP_2:PodPort,PODIP_3:PodPort]
+    
+    3. LoadBalancer 
+       50 Node Cluster : 31007 
+       
+    Chrome -> DNS -> LoadBalancer-PIP -> NodePool [50 Node]:[NodePort] -> 172.31.0.101:31001 ->  worker101 -> KubeProxy -> Routing Rules -> ClusterIP:ClusterPort -> [ PODIP_1:PodPort,PODIP_2:PodPort,PODIP_3:PodPort]
+    
+    
+    10 LBs
+    
+    4. IngressCantroller 
+       Chrome -> DNS -> LoadBalancer-PIP -> [AnyworkerNode] -> 172.31.0.101:31001 ->  worker101 -> KubeProxy -> Routing Rules -> Ingress Cantroller [ClusterIP:ClusterPort] -> IngressRules -> hello:/ -> SVC hello:31001 -> ClusterIP:ClusterPort -> PODIP_1:PodPort,PODIP_2:PodPort,PODIP_3:PodPort]
+    
+    5. HA Prxoy 
+       Chrome -> DNS  proxy.example.com -> VIP -> Active Proxy -> HAProxyNode1 -> 
+       Rules: 
+        /ercore  -> 172.31.0.10 
+        /ppe     -> 172.31.0.11 
+        /mwallet -> 172.31.0.10[1:50]:443 
+        
+        HAProxy ->  172.31.0.101:443 ->  worker101 -> KubeProxy -> Routing Rules -> ClusterIP:ClusterPort -> [ PODIP_1:PodPort,PODIP_2:PodPort,PODIP_3:PodPort]
+   
+   
+        HAProxy -> [AnyworkerNode] -> 172.31.0.101:31001 ->  worker101 -> KubeProxy -> Routing Rules -> Ingress Cantroller [ClusterIP:ClusterPort] -> IngressRules -> hello:/ -> SVC hello:31001 -> ClusterIP:ClusterPort -> PODIP_1:PodPort,PODIP_2:PodPort,PODIP_3:PodPort]
