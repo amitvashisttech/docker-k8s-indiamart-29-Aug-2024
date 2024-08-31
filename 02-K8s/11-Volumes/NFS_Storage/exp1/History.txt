@@ -1,0 +1,69 @@
+```
+
+  660  git pull 
+
+  661  ls
+  662  cd
+  663  apt-get install nfs-kernel-server -y 
+  664  mkdir /exports
+  665  chown nobody:nogroup /exports
+  666  kubectl get nodes 
+  667  vim /etc/exports 
+  668  systemctl restart nfs-kernel-server
+  669  systemctl status  nfs-kernel-server
+  670  showmount -e localhost 
+  671  cd /exports/
+  672  ls
+  673  cat hello.txt 
+  674  cd 
+  675  ls
+  680  cd 14-Volumes-NFS/
+  681  ls
+  682  vim pv-nfs.yaml 
+  683  ls
+  684  kubectl get pv 
+  685  kubectl apply -f pv-nfs.yaml
+  686  kubectl get pv 
+  687  vim pvc-nfs.yaml 
+  688  kubectl get pvc 
+  689  kubectl apply -f pvc-nfs.yaml 
+  690  kubectl get pvc 
+  691  kubectl get pv
+  692  ls
+  693  vim nfs-busybox-rc.yaml 
+  694  kubectl apply -f nfs-busybox-rc.yaml 
+  695  kubectl get pods 
+  696  kubectl describe pod nfs-busybox-2-74l7c
+  697  ls
+  698  kubectl get pods -o wide 
+  699  tail -f  /exports/index.html 
+  700  ls
+  701  vim web-rc-pvc.yaml 
+  702  kubectl apply -f web-rc-pvc.yaml 
+  703  ls
+  704  cat nfs-web-svc.yaml 
+  705  kubectl apply -f nfs-web-svc.yaml 
+  706  kubectl get svc 
+  707  kubectl delete svc default-subdomain helloworld-nginx-service myweb
+  708  kubectl get svc 
+  709  kubectl edit svc nfs-web
+  710  kubectl get svc 
+  711  > /exports/index.html 
+  712  kubectl get pods 
+  713  kubectl delete pod nfs-busybox-2-74l7c nfs-busybox-2-vxkdn nfs-busybox-2-zkcxz
+  714  kubectl get pods 
+  715  kubectl get deploy 
+  716  ls
+  717  kubectl delete -f nfs-busybox-rc.yaml
+  718  kubectl get deploy 
+  719  kubectl get pods 
+  720  ls
+  721  cd ..
+  722  ls
+  723  kubectl delete -f 14-Volumes-NFS/
+  724  ls
+  725  cd 14-Volumes-NFS/
+  726  ls
+  727  history 
+  728  history > History.txt
+```
