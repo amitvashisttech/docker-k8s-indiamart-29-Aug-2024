@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helloworld-2-deployment
+  labels:
+    app: helloworld-2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: helloworld-2
+  template:
+    metadata:
+      labels:
+        app: helloworld-2
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: k8s-demo
+        image: amitvashist7/k8s-tiny-web
+        ports:
+        - name: nodejs-port
+          containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /
+            port: nodejs-port
+          initialDelaySeconds: 10
+          timeoutSeconds: 30
+          periodSeconds: 30
+          successThreshold: 1
+          failureThreshold: 2
+
