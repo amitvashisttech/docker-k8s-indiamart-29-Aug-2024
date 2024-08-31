@@ -1,0 +1,19 @@
+   10  cat 1-ConfigMap.yaml
+   12  cat reverseproxy.conf
+   14  kubectl get configmap
+   15  kubectl create configmap nginx-config --help
+   20  kubectl create configmap nginx-config --from-file=reverseproxy.conf --dry-run
+   21  kubectl create configmap nginx-config --from-file=reverseproxy.conf --dry-run -o yaml
+   22  kubectl create configmap nginx-config --from-file=reverseproxy.conf --dry-run -o yaml  > 1-ConfigMap.yaml
+   27  kubectl  apply -f 1-ConfigMap.yaml
+   29  cat 2-nginx-pod.yml
+   30  kubectl  apply -f 2-nginx-pod.yml
+   31  kubectl  get configmap
+   34  kubectl  get pods
+   36  kubectl  apply -f 3-nginx-service.yaml
+   37  kubectl  get svc
+   38  cat 3-nginx-service.yaml
+   39  kubectl  describe svc helloworld-nginx-service
+   42  kubectl  get pods
+   43  kubectl  describe pod helloworld-nginx
+   44  kubectl  exec -it helloworld-nginx -c nginx -- bash
